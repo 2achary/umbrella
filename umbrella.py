@@ -32,13 +32,17 @@ def send_message(body):
     return sids
 
 
-def it_will_rain():
+def it_will_rain(date=None):
     """
     Builds the url, makes the request to the weather API and parses the response
     to see if it calls for rain. The conditions are added to the CONDITIONS set.
+    :param date: if provided, checks for rain on given day, otherwises uses today.
     :return: Boolean
     """
-    today = datetime.date.today().isoformat()
+    if not date:
+        today = datetime.date.today().isoformat()
+    else:
+        today = date
     base_url = 'http://api.openweathermap.org/'
     url_path = 'data/2.5/forecast/city'
     q_string = '?id={}&APPID={}'.format(CITY_ID, OPEN_WEATHER_API_KEY)
